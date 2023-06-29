@@ -3,24 +3,27 @@
     class="w-screen voerflow-hidden bg-gradient-to-b from-purple-100 to-whit"
   >
     <!-- 头部 -->
-    <div class="flex justify-center pt-[3vw] items-center relative">
-      <Icon icon="basil:menu-solid" width="35" height="35" />
-      <input
-        type="text"
-        placeholder="男孩别哭"
-        class="border w-3/4 rounded-[3vw] h-[10vw] text-center bg-gradient-to-r from-red-100 via-blue-100 bg-opacity-20"
-      />
-      <Icon icon="system-uicons:microphone" width="35" height="35" />
-      <Icon
-        icon="ei:search"
-        width="35"
-        height="35"
-        class="absolute right-[70vw]"
-      />
+    <div class="fixed top-0 bg-[#fff] p-4 w-full z-[22] h-[25vw]">
+      <div class="flex justify-center items-center relative">
+        <Icon icon="basil:menu-solid" width="35" height="35" />
+        <input
+          type="text"
+          placeholder="男孩别哭"
+          class="border rounded-[5vw] px-4 py-2 w-3/4 text-center bg-gradient-to-b from-purple-100 to-whit"
+        />
+        <Icon icon="system-uicons:microphone" width="35" height="35" />
+        <Icon
+          icon="ei:search"
+          width="35"
+          height="35"
+          class="absolute left-[15vw]"
+        />
+      </div>
     </div>
+
     <!-- 轮播 -->
     <div
-      class="swiper-container overflow-hidden mt-[6vw] w-[89.5vw] mx-auto rounded-[3vw]"
+      class="swiper-container overflow-hidden mt-[25vw] w-[89.5vw] mx-auto rounded-[3vw]"
     >
       <BannersView class="swiper-wrapper rounded-[3vw]" :banners="banners" />
     </div>
@@ -48,7 +51,7 @@
       </div>
       <div class="scroll-wrapper" ref="scroll_1">
         <RecommendView
-          class="flex overflow-hidden mt-[3vw] scroll-content w-[210vw]"
+          class="flex overflow-hidden mt-[3vw] scroll-content w-[210vw] text-[1.2vw]"
           ref="scrollContent"
           :recommend="recommend"
         />
@@ -84,18 +87,60 @@
         <RakingView class="flex flex-wrap w-[560vw]" :raking="raking" />
       </div>
     </div>
+    <!-- 热门话题 -->
+    <div class="mt-[7vw] w-[89.5vw] mx-auto overflow-hidden">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <span>热门话题</span>
+          <Icon icon="ph:caret-right-light" width="15" height="15" />
+        </div>
+        <div>
+          <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
+        </div>
+      </div>
+      <div class="overflow-hidden scroll-wrapper mt-[7vw]" ref="scroll_4">
+        <ul class="w-[350vw] flex mb-[6.31vw] scroll-content">
+          <li
+            v-for="item in 5"
+            :key="item.id"
+            class="relative bg-[#A5A5A5] w-[68vw] h-[28vw] rounded-[3vw] py-[4vw] px-[3vw] mr-[2.83vw]"
+          >
+            <div class="flex items-center">
+              <Icon
+                icon="uil:comment-chart-line"
+                color="white"
+                class="w-[5vw] h-[5vw] mr-[2vw]"
+              />
+
+              <h4 class="text-[4vw] text-[#fff]">音乐节</h4>
+            </div>
+
+            <p class="text-[2.6vw] text-[#D7D7D7]">182万热度</p>
+
+            <p class="text-[2.6vw] text-[#fff] w-[40vw] mt-[2vw]">
+              BMTH_official:什么是[全场大合唱]
+            </p>
+            <img
+              src="https://p4.music.126.net/em_fXgUJDApoV_3_8HYkNg==/109951164362973668.jpg"
+              alt=""
+              class="w-[13.75vw] h-[13.75vw] rounded-[12px] absolute right-[2.9vw] bottom-[2.9vw]"
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
     <!-- 日历 -->
     <div class="mt-[7vw] w-[89.5vw] mx-auto overflow-hidden">
       <div class="flex items-center justify-between">
         <div class="flex items-center">
-          <h1>音乐日历</h1>
-          <Icon icon="mingcute:right-line" color="#4f5a6e" />
+          <span>音乐日历</span>
+          <Icon icon="ph:caret-right-light" width="15" height="15" />
         </div>
-        <div class="mr-[4vw]">
+        <div>
           <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
         </div>
       </div>
-      <div class="bg-[#f0f0f0] rounded-[10px] w-[89.5vw] h-[35vw]">
+      <div class="bg-[#fffefe] rounded-[10px] w-[89.5vw] h-[35vw]">
         <McView class="ml-[8px]" :music="music" />
       </div>
     </div>
@@ -168,6 +213,7 @@ export default {
     this.init(this.$refs.scroll_1);
     this.init(this.$refs.scroll_2);
     this.init(this.$refs.scroll_3);
+    this.init(this.$refs.scroll_4);
   },
   beforeDestroy() {
     this.bs.destroy();

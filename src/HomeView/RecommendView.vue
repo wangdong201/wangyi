@@ -11,7 +11,7 @@
               />
             </div>
             <p
-              class="text-base line-clamp-2 text-ellipsis overflow-hidden w-[32vw]"
+              class="line-clamp-2 text-ellipsis overflow-hidden w-[32vw]"
             >
               {{ item.name }}
             </p>
