@@ -3,14 +3,15 @@
     <div
       v-for="item in raking"
       :key="item.id"
-      class="w-[90vw] h-[56vw] rounded-[3vw] mr-[3vw] opacity-0.4"
+      class="w-[90vw] h-[54vw] rounded-[3vw] mr-[3vw] opacity-0.4 bg-[#FFFFFF] shadow-md dark:bg-[#25272e] dark:text-[#e9e9e9]"
     >
+     <div class="m-[2vw]">
       <div class="flex justify-between items-center">
         <div class="flex items-center">
           <p>{{ item.uiElement.mainTitle.title }}</p>
-          <Icon icon="iconamoon:arrow-right-2-thin" width="40" height="40" />
+          <Icon icon="iconamoon:arrow-right-2-thin" width="20" height="20" />
         </div>
-        <span class="text-gray-100">{{
+        <span class="text-[#ccc]">{{
           item.uiElement.mainTitle.titleDesc
         }}</span>
       </div>
@@ -41,6 +42,7 @@
           </p>
         </div>
       </div>
+     </div>
     </div>
   </div>
 </template>
