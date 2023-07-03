@@ -11,11 +11,14 @@
           <div @click="drawerVisible = !drawerVisible">
             <Icon icon="basil:menu-solid" width="35" height="35" />
           </div>
+          <router-link :to="{ path: '/SearchView' }">
           <input
-            type="text"
+            type="text"   
             placeholder="男孩别哭"
-            class="border rounded-[5vw] px-4 py-2 w-3/4 text-center bg-gradient-to-b from-purple-100 to-whit h-[8.7vw] dark:bg-[#2c2e35]"
+            class="border rounded-[5vw] px-4 py-2 w-[75vw] text-center h-[8.7vw] dark:bg-[#2c2e35]"
           />
+        </router-link>
+        <router-view />
           <Icon icon="system-uicons:microphone" width="35" height="35" />
           <Icon
             icon="ei:search"
@@ -62,7 +65,7 @@
             <span>推荐歌单</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblel = !drawerVisiblel">
+          <div @click="drawerVisiblel = !drawerVisiblel,info='推荐歌单'" >
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -97,7 +100,7 @@
                   </div>
                 </transition>
               </div>
-              <p class="text-[2.78vw] text-[#3E4759] scroll-item line-clamp-2 dark:text-[#fff]">
+              <p class="text-[1.2vw] text-[#3E4759] scroll-item line-clamp-2 dark:text-[#fff]">
                 {{ resourceData }}
               </p>
             </div>
@@ -118,7 +121,7 @@
             <span>新歌新碟/数字专辑</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblelA = !drawerVisiblel">
+          <div @click="drawerVisiblel = !drawerVisiblel,info='新歌新碟'" >
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -138,7 +141,7 @@
             <span>排行榜</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblelB = !drawerVisiblel">
+          <div @click="drawerVisiblel = !drawerVisiblel,info='排行榜'" >
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -153,7 +156,7 @@
             <span>热门话题</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblelC = !drawerVisiblel">
+          <div @click="drawerVisiblel = !drawerVisiblel,info='热门话题'" >
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -195,7 +198,7 @@
             <span>音乐日历</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblelD = !drawerVisiblel">
+          <div @click="drawerVisiblel = !drawerVisiblel,info='音乐日历'" >
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -205,22 +208,25 @@
       </div>
       <!-- 抽屉1 -->
       <Drawer :visible.sync="drawerVisible" direction="ltr">
-        <div
-          class="w-[100%] h-[431vw] bg-[#F5F5F5] dark:bg-gray-900 dark:text-[#fff]"
-        >
+        <template #header>
           <!-- 用户信息 -->
           <div
-            class="w-[76.6vw] mx-auto h-[10vw] flex items-center justify-between"
+            class="w-[76.6vw] mx-auto h-[10vw] flex items-center justify-between fixed bg-[#fff] dark:bg-gray-900"
           >
             <div class="flex items-center">
-              <div class="rounded-[50%] bg-pink-500 w-[7.5vw] h-[7.5vw]"></div>
-              <p>用户名</p>
+              <div class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
+              </div>
+              <p class="pl-[1vw]">用户名</p>
               <Icon icon="ph:caret-right-light" width="15" height="15" />
             </div>
             <div>
               <Icon icon="tabler:scan" width="35" class="text-[#000]" />
             </div>
           </div>
+        </template>
+        <div
+          class="w-[100%] h-[431vw] bg-[#F5F5F5] dark:bg-gray-900 dark:text-[#fff] mt-[12vw]"
+        >
           <!-- vip卡 -->
           <div
             class="h-[29.1vw] w-[76.6vw] bg-gradient-to-r from-[#3C3A38] to-[#5B504C] rounded-[4vw] mt-[5vw] mx-auto"
@@ -246,7 +252,7 @@
               <p class="text-[#998783] text-[1.2vw]">
                 您的黑胶VIP即将到期,点击立即续费
               </p>
-              <div class="w-[5.8vw] h-[5.8vw] bg-pink-400"></div>
+              <!-- <div class="w-[5.8vw] h-[5.8vw] bg-pink-400"></div> -->
             </div>
           </div>
           <!-- 我的消息 -->
@@ -403,7 +409,7 @@
               </div>
             </div>
             <div
-              class="flex justify-between items-center w-[67.8vw] h-[12.3vw] mx-auto"
+              class="flex justify-between items-center w-[67.8vw] h-[12.3vw] mx-auto "
             >
               <div class="flex items-center h-[12.3vw]">
                 <Icon
@@ -416,7 +422,7 @@
                 <t-switch
                   :value="switchCheckStatus"
                   @input="(e) => (switchCheckStatus = e)"
-                  class="ml-[12vw] dark:bg-[#fc0f0f]"
+                  class=" dark:bg-[#fc0f0f]"
                 />
               </div>
             </div>
@@ -609,122 +615,11 @@
         </div>
       </Drawer>
       <!-- 抽屉2 -->
-      <Drawer :visible.sync="drawerVisiblel" direction="btt" width="100">
+      <Drawer :visible.sync="drawerVisiblel" direction="btt" width="100" :title="info">
         <div
-          class="w-[100%] rounded-tl-[3vw] rounded-tr-[3vw] dark:bg-[#2C2C36] dark:text-[#E6E4E8]"
+          class="w-[100%] dark:bg-[#2C2C36] dark:text-[#E6E4E8]"
         >
           <div class="w-[92vw] mx-auto">
-            <div class="w-[92vw] h-[12.5vw] border-b">
-              <p class="leading-[12.5vw] text-[#ccc]">推荐歌单</p>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon icon="iconamoon:like-light" width="16" height="16" />
-              <span class="pl-[2vw]">优先推荐</span>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon icon="ion:heart-dislike-outline" width="16" height="16" />
-              <span class="pl-[2vw]">减少推荐</span>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon
-                icon="icon-park-outline:more-three"
-                width="16"
-                height="16"
-              />
-              <span class="pl-[2vw]">更多内容</span>
-            </div>
-          </div>
-        </div>
-      </Drawer>
-      <Drawer :visible.sync="drawerVisiblelA" direction="btt" width="100">
-        <div
-          class="w-[100%] rounded-tl-[3vw] rounded-tr-[3vw] dark:bg-[#2C2C36] dark:text-[#E6E4E8]"
-        >
-          <div class="w-[92vw] mx-auto">
-            <div class="w-[92vw] h-[12.5vw] border-b">
-              <p class="leading-[12.5vw] text-[#ccc]">新歌新碟/数字专辑</p>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon icon="iconamoon:like-light" width="16" height="16" />
-              <span class="pl-[2vw]">优先推荐</span>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon icon="ion:heart-dislike-outline" width="16" height="16" />
-              <span class="pl-[2vw]">减少推荐</span>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon
-                icon="icon-park-outline:more-three"
-                width="16"
-                height="16"
-              />
-              <span class="pl-[2vw]">更多内容</span>
-            </div>
-          </div>
-        </div>
-      </Drawer>
-      <Drawer :visible.sync="drawerVisiblelB" direction="btt" width="100">
-        <div
-          class="w-[100%] rounded-tl-[3vw] rounded-tr-[3vw] dark:bg-[#2C2C36] dark:text-[#E6E4E8]"
-        >
-          <div class="w-[92vw] mx-auto">
-            <div class="w-[92vw] h-[12.5vw] border-b">
-              <p class="leading-[12.5vw] text-[#ccc]">排行榜</p>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon icon="iconamoon:like-light" width="16" height="16" />
-              <span class="pl-[2vw]">优先推荐</span>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon icon="ion:heart-dislike-outline" width="16" height="16" />
-              <span class="pl-[2vw]">减少推荐</span>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon
-                icon="icon-park-outline:more-three"
-                width="16"
-                height="16"
-              />
-              <span class="pl-[2vw]">更多内容</span>
-            </div>
-          </div>
-        </div>
-      </Drawer>
-      <Drawer :visible.sync="drawerVisiblelC" direction="btt" width="100">
-        <div
-          class="w-[100%] rounded-tl-[3vw] rounded-tr-[3vw] dark:bg-[#2C2C36] dark:text-[#E6E4E8]"
-        >
-          <div class="w-[92vw] mx-auto">
-            <div class="w-[92vw] h-[12.5vw] border-b">
-              <p class="leading-[12.5vw] text-[#ccc]">热门话题</p>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon icon="iconamoon:like-light" width="16" height="16" />
-              <span class="pl-[2vw]">优先推荐</span>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon icon="ion:heart-dislike-outline" width="16" height="16" />
-              <span class="pl-[2vw]">减少推荐</span>
-            </div>
-            <div class="flex h-[12.1vw] items-center">
-              <Icon
-                icon="icon-park-outline:more-three"
-                width="16"
-                height="16"
-              />
-              <span class="pl-[2vw]">更多内容</span>
-            </div>
-          </div>
-        </div>
-      </Drawer>
-      <Drawer :visible.sync="drawerVisiblelD" direction="btt" width="100">
-        <div
-          class="w-[100%] rounded-tl-[3vw] rounded-tr-[3vw] dark:bg-[#2C2C36] dark:text-[#E6E4E8]"
-        >
-          <div class="w-[92vw] mx-auto">
-            <div class="w-[92vw] h-[12.5vw] border-b">
-              <p class="leading-[12.5vw] text-[#ccc]">音乐日历</p>
-            </div>
             <div class="flex h-[12.1vw] items-center">
               <Icon icon="iconamoon:like-light" width="16" height="16" />
               <span class="pl-[2vw]">优先推荐</span>
@@ -758,7 +653,6 @@ import SongView from './HomeView/SongView.vue';
 import RakingView from './HomeView/RakingView.vue';
 import McView from './HomeView/McView.vue';
 import Drawer from './components/Drawer.vue';
-// import Switch from './HomeView/Switch.vue';
 export default {
   comments: {
     BannersView,
@@ -768,17 +662,12 @@ export default {
     RakingView,
     McView,
     Drawer,
-    // Switch,
   },
   data() {
     return {
       switchCheckStatus: false,
       drawerVisible: false,
       drawerVisiblel: false,
-      drawerVisiblelA: false,
-      drawerVisiblelB: false,
-      drawerVisiblelC: false,
-      drawerVisiblelD: false,
       visible: true,
       banners: [],
       recommend: [],
@@ -789,6 +678,7 @@ export default {
       visibleAA: 0,
       resourceData: '',
       resources: [],
+      info:''
     };
   },
   mounted() {
@@ -904,7 +794,6 @@ export default {
       )
       .then((res) => {
         this.music = res.data.data.calendarEvents.slice(0, 2);
-        // console.log(this.music);
       });
   },
   components: {

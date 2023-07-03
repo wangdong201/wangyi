@@ -12,7 +12,7 @@
         </div>
         <p class="text-[1.2vw] text-center">{{ item.name }}</p>
       </li>
-      <span class="absolute left-[5vw] top-[5.5vw] text-[#fff]">{{ new Date().getDate() }}</span>
+      <span class="absolute left-[4.5vw] top-[4.5vw] text-[#fff]">{{ new Date().getDate() }}</span>
     </ul>
   </div>
 </div>

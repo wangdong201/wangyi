@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import './index.css';
 import { Icon } from '@iconify/vue2';
-// import App from './App.vue';
-import WangyiView from './WangyiView.vue';
+import router from './router';
+import App from './App.vue';
 import Drawer from './components/Drawer.vue';
 import { Swipe, SwipeItem,Vant } from 'vant';
 import 'vant/lib/index.css';
@@ -14,11 +14,8 @@ Vue.component('Drawer', Drawer);
 Vue.component('Icon', Icon);
 const vm = new Vue({
   el: '#app',
-  data:{
-    swiper:null
-  },
-  render: (h) => h(WangyiView),
-  // components:{App},
-  // template:'<App/>',
+  router,
+  components:{App},
+  template:'<App/>',
 });
 

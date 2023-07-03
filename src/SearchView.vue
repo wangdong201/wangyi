@@ -1,0 +1,155 @@
+<template>
+  <div class="w-screen bg-[#F8F9FD] text-[#000] mt-0">
+    <div class="w-[92.3vw] mx-auto bg-[#F8F9FD] voerflow-hidden">
+      <!-- 搜索栏 -->
+      <div
+        class="flex justify-center items-center pt-[3vw] w-[92.3vw] mx-auto relative"
+      >
+        <div class="mr-[3vw]">
+          <router-link :to="{ path: '/WangyiView' }">
+            <Icon
+              icon="tabler:arrow-up"
+              width="38"
+              :rotate="3"
+              class="pl-[2vw]"
+            />
+          </router-link>
+          <router-view />
+        </div>
+        <input
+          type="text"
+          placeholder="郁可唯"
+          class="border rounded-[5vw] px-4 py-2 w-[72.2vw] h-[8.7vw] pl-[10vw]"
+        />
+        <p class="ml-[3vw] text-[1.6vw] whitespace-nowrap">搜索</p>
+        <Icon
+          icon="ei:search"
+          width="28"
+          height="28"
+          class="absolute left-[15vw]"
+        />
+      </div>
+      <div
+        class="flex w-[92.3vw] mx-auto h-[14.2vw] mt-[3vw] justify-around items-center text-center text-[#676e79]"
+      >
+        <div>
+          <Icon
+            icon="icon-park-solid:people"
+            width="30"
+            height="30"
+            class="text-[#fd3b46]"
+          />
+          <span>歌手</span>
+        </div>
+        <div>
+          <Icon
+            icon="mdi:book-music"
+            width="30"
+            height="30"
+            class="text-[#fd3b46]"
+          />
+          <span>曲风</span>
+        </div>
+        <div>
+          <Icon
+            icon="solar:music-note-3-bold"
+            width="30"
+            height="30"
+            class="text-[#fd3b46]"
+          />
+          <span>专区</span>
+        </div>
+        <div>
+          <Icon
+            icon="fa:microphone"
+            width="30"
+            height="30"
+            class="text-[#fd3b46]"
+          />
+          <span>识曲</span>
+        </div>
+      </div>
+      <!-- 猜你喜欢 -->
+      <div class="w-[92.3vw] mx-auto mt-[4.3vw]">
+        <div class="flex justify-between">
+          <p>猜你喜欢</p>
+          <div>
+            <Icon icon="mdi-light:refresh" width="30" :rotate="1" />
+          </div>
+        </div>
+        <div class="flex mt-[2.778vw] text-[1.2vw]">
+          <div
+            class="bg-[#fff] rounded-[5vw] mr-[1.556vw] h-[6.947vw] w-[17.5vw] text-center leading-[6.947vw] whitespace-nowrap"
+          >
+            郁可唯
+          </div>
+          <div
+            class="bg-[#fff] rounded-[5vw] mr-[1.556vw] h-[6.947vw] w-[13.426vw] text-center leading-[6.947vw] whitespace-nowrap"
+          >
+            王卓
+          </div>
+          <div
+            class="bg-[#fff] rounded-[5vw] mr-[1.556vw] h-[6.947vw] w-[20.463vw] text-center leading-[6.947vw] whitespace-nowrap"
+          >
+            男孩别哭
+          </div>
+          <div
+            class="bg-[#fff] rounded-[5vw] mr-[1.556vw] h-[6.947vw] w-[23.796vw] text-center leading-[6.947vw] whitespace-nowrap"
+          >
+            我要找到你
+          </div>
+        </div>
+      </div>
+      <!-- 排行榜 -->
+      <div class="w-[64.074vw] bg-[#fff] h-[200vw] rounded-[4vw] mt-[5.093vw]">
+        <div class="w-[55.193vw] mx-auto border h-[200vw]">
+          <div class="h-[12.87vw] flex items-center border-b">
+            <div class="h-[12.87vw] mr-[3.611vw]">
+              <span class="text-[#283349] text-[1.2vw] leading-[12.87vw]"
+                >热搜榜</span
+              >
+            </div>
+            <div
+              class="flex w-[12.87vw] h-[5.556vw] rounded-[5vw] bg-[#f1f4f4] items-center justify-center"
+            >
+              <Icon
+                icon="ion:play"
+                width="12"
+                height="12"
+                class="text-[#3c465a]"
+              />
+              <span class="text-[1.2vw] whitespace-nowrap">播放</span>
+            </div>
+          </div>
+          <div>
+            <ul>
+              <li class="h-[9.167vw]">
+                <p>1</p>
+                <div>
+                  <p></p>
+                  <img url="" alt="" />
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import { rankingDetail } from '@/request';
+export default {
+  async created() {
+    const rankingSJ = await rankingDetail();
+    // console.log(rankingSJ);
+    this.rankingPlaylist = rankingSJ.data.data.searchWord;
+    console.log(rankingPlaylist);
+  },
+  data() {
+    return {
+      rankingPlaylist:[],
+    };
+  },
+};
+</script>

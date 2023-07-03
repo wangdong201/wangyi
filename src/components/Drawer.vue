@@ -3,14 +3,21 @@
     <transition :name="direction">
       <div
         v-show="visible"
-        class="w-screen h-[220px] bg-white fixed z-[999] overflow-auto rounded-tl-[3vw] rounded-tr-[3vw]"
+        class="w-screen h-[220px] bg-white fixed z-[999] overflow-auto dark:bg-gray-900 dark:text-[#fff]"
         :style="[drawerContentStyle, { width }]"
       >
         <div>
           <slot name="header">
-            <div class="flex justify-between items-center">
+            <div
+              class="flex justify-between overflow-hidden items-center h-[12.5vw] border-b mx-auto dark:bg-[#2C2C36] dark:text-[#E6E4E8] rounded-tl-[3vw] rounded-tr-[3vw] pl-[3vw] pr-[3vw]"
+            >
               <p>{{ title }}</p>
-              <!-- <Icon @click.native="closeDrawer" icon="codicon:error" width="16" height="16" /> -->
+              <Icon
+                @click.native="closeDrawer"
+                icon="codicon:error"
+                width="16"
+                height="16"
+              />
             </div>
           </slot>
         </div>
@@ -56,7 +63,7 @@ export default {
       if (this.direction === 'btt') {
         return {
           width: '100vw',
-          height:'56vw',
+          height: '49vw',
           left: 0,
           bottom: 0,
         };
@@ -109,7 +116,6 @@ export default {
 .btt-leave {
   transform: translateY(0);
 }
-
 
 .ltr-enter,
 .ltr-leave-to {
