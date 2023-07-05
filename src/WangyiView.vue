@@ -22,13 +22,13 @@
           <Icon icon="system-uicons:microphone" width="35" height="35" />
           <Icon
             icon="ei:search"
-            width="35"
-            height="35"
+            width="30"
+            height="30"
             class="absolute left-[15vw]"
           />
           <Icon
             icon="tabler:scan"
-            width="35"
+            width="25"
             class="absolute right-[15vw] text-[#ccc]"
           />
         </div>
@@ -211,7 +211,7 @@
         <template #header>
           <!-- 用户信息 -->
           <div
-            class="w-[76.6vw] mx-auto h-[10vw] flex items-center justify-between fixed bg-[#fff] dark:bg-gray-900"
+            class="overflow-hidden w-[76.6vw] mx-auto h-[10vw] flex items-center justify-between fixed bg-[#fff] dark:bg-gray-900"
           >
             <div class="flex items-center">
               <div class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
@@ -225,7 +225,7 @@
           </div>
         </template>
         <div
-          class="w-[100%] h-[431vw] bg-[#F5F5F5] dark:bg-gray-900 dark:text-[#fff] mt-[12vw]"
+          class="w-[100%] h-[431vw] bg-[#F5F5F5] dark:bg-gray-900 dark:text-[#fff] mt-[12vw] overflow-hidden"
         >
           <!-- vip卡 -->
           <div
@@ -615,9 +615,9 @@
         </div>
       </Drawer>
       <!-- 抽屉2 -->
-      <Drawer :visible.sync="drawerVisiblel" direction="btt" width="100" :title="info">
+      <Drawer :visible.sync="drawerVisiblel" direction="btt" width="100vw" :title="info">
         <div
-          class="w-[100%] dark:bg-[#2C2C36] dark:text-[#E6E4E8]"
+          class="w-[100%] dark:bg-[#2C2C36] dark:text-[#E6E4E8] overflow-hidden"
         >
           <div class="w-[92vw] mx-auto">
             <div class="flex h-[12.1vw] items-center">

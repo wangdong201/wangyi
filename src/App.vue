@@ -7,22 +7,7 @@
    </div>
   </template>
   <script>
-  // export default {
-  //   components: { },
-  //   data() {
-  //     return {
-  //       visibleView: 'WangyiView',
-  //     };
-  //   },
-  //   beforeCreate() {
-  //     window.onhashchange = () => {
-  //       this.visibleView = location.hash.replace('#', '');
-  //     };
-  //   },
-  //   created() {
-  //     window.vm = this;
-  //   },
-  // };
+  
   </script>
   <style>
   @tailwind base;

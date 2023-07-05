@@ -1,6 +1,6 @@
 <template>
-  <div class="w-screen bg-[#F8F9FD] text-[#000] mt-0">
-    <div class="w-[92.3vw] mx-auto bg-[#F8F9FD] voerflow-hidden">
+  <div class="w-screen bg-[#F8F9FD] text-[#000] mt-0 overflow-hidden">
+    <div class="w-[92.3vw] mx-auto bg-[#F8F9FD] overflow-hidden">
       <!-- 搜索栏 -->
       <div
         class="flex justify-center items-center pt-[3vw] w-[92.3vw] mx-auto relative"
@@ -72,9 +72,9 @@
       <!-- 猜你喜欢 -->
       <div class="w-[92.3vw] mx-auto mt-[4.3vw]">
         <div class="flex justify-between">
-          <p>猜你喜欢</p>
+          <p class="text-[1.4vw]">猜你喜欢</p>
           <div>
-            <Icon icon="mdi-light:refresh" width="30" :rotate="1" />
+            <Icon icon="mdi-light:refresh" width="25" :rotate="1" />
           </div>
         </div>
         <div class="flex mt-[2.778vw] text-[1.2vw]">
@@ -101,55 +101,78 @@
         </div>
       </div>
       <!-- 排行榜 -->
-      <div class="w-[64.074vw] bg-[#fff] h-[200vw] rounded-[4vw] mt-[5.093vw]">
-        <div class="w-[55.193vw] mx-auto border h-[200vw]">
-          <div class="h-[12.87vw] flex items-center border-b">
-            <div class="h-[12.87vw] mr-[3.611vw]">
-              <span class="text-[#283349] text-[1.2vw] leading-[12.87vw]"
-                >热搜榜</span
-              >
-            </div>
-            <div
-              class="flex w-[12.87vw] h-[5.556vw] rounded-[5vw] bg-[#f1f4f4] items-center justify-center"
-            >
-              <Icon
-                icon="ion:play"
-                width="12"
-                height="12"
-                class="text-[#3c465a]"
-              />
-              <span class="text-[1.2vw] whitespace-nowrap">播放</span>
-            </div>
-          </div>
-          <div>
-            <ul>
-              <li class="h-[9.167vw]">
-                <p>1</p>
-                <div>
-                  <p></p>
-                  <img url="" alt="" />
+      <div class="voerflow-hidden flex">
+        <van-swipe :loop="false" :width="300" class="rotationChart">
+          <van-swipe-item
+            v-for="item in list"
+            :key="item.id"
+            class="w-[64.074vw] bg-[#fff] h-[200vw] rounded-[4vw] mt-[5.093vw] mr-[2vw]"
+          >
+            <div class="w-[55.193vw] mx-auto h-[196vw]">
+              <div class="h-[12.87vw] flex items-center border-b">
+                <div class="h-[12.87vw] mr-[3.611vw]">
+                  <span class="text-[#283349] text-[1.2vw] leading-[12.87vw]">{{
+                    item.name
+                  }}</span>
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+                <div
+                  class="flex w-[12.87vw] h-[5.556vw] rounded-[5vw] bg-[#f1f4f4] items-center justify-center"
+                >
+                  <Icon
+                    icon="ion:play"
+                    width="12"
+                    height="12"
+                    class="text-[#3c465a]"
+                  />
+                  <span class="text-[1.2vw] whitespace-nowrap">播放</span>
+                </div>
+              </div>
+              <div>
+                <ul
+                  class=""
+                  v-for="(item1, index) in item.tracks.slice(0, 20)"
+                  :key="index.id"
+                >
+                  <li class="h-[9.167vw] flex text-[1.2vw] leading-[9.176vw]">
+                    <p
+                      :style="{ color: index < 3 ? 'red' : '#7E8590' }"
+                      class="mr-[4vw]"
+                    >
+                      {{ index + 1 }}
+                    </p>
+                    <p class="truncate">{{ item1.name }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </van-swipe-item>
+        </van-swipe>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { rankingDetail } from '@/request';
+import { fetchSeachList } from './request/index';
+
 export default {
-  async created() {
-    const rankingSJ = await rankingDetail();
-    // console.log(rankingSJ);
-    this.rankingPlaylist = rankingSJ.data.data.searchWord;
-    console.log(rankingPlaylist);
-  },
+  components: { fetchSeachList },
   data() {
     return {
-      rankingPlaylist:[],
+      list: [],
     };
+  },
+  async created() {
+    const res = await fetchSeachList();
+    this.list = (await fetchSeachList()).slice(0, 10);
+    console.log(this.list[0].name);
+    console.log(res);
+    console.log(this.list);
   },
 };
 </script>
+
+<style>
+.rotationChart .van-swipe__indicators {
+  display: none;
+}
+</style>

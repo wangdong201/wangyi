@@ -1,5 +1,6 @@
 import SearchView from '../SearchView.vue';
 import WangyiView from '../WangyiView.vue';
+import SongSheet from '../SongSheet.vue';
 export default [
   // 路径重定向
   {
@@ -13,5 +14,9 @@ export default [
   {
     path: '/SearchView',
     component: SearchView,
+  },
+  {
+    path: '/SongSheet',
+    component: SongSheet,
   },
 ];

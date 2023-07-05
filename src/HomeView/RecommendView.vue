@@ -2,11 +2,14 @@
   <ul>
     <li v-for="item in recommend" :key="item.id" class="mr-[3vw]">
       <div class="w-[32vw] h-[32vw] relative">
+        <router-link :to="{ path: '/SongSheet' }">
         <img
           :src="item.uiElement.image.imageUrl"
           alt=""
           class="w-[32vw] h-[32vw] rounded-[3vw]"
         />
+      </router-link>
+      <router-view />
         <Icon
           icon="bi:play-fill"
           width="40"
