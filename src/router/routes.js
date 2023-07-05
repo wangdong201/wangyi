@@ -19,4 +19,8 @@ export default [
     path: '/SongSheet',
     component: SongSheet,
   },
+  {
+    path:'/song',
+    component:SongSheet,
+  }
 ];

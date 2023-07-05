@@ -693,6 +693,10 @@ export default {
     this.bs.destroy();
   },
   methods: {
+    songDetails(id) {
+         console.log(id)  
+         this.$router.push({ path: '/song', query: { id } });
+    },
     animateItems() {
       setInterval(() => {
         this.visibleAA++;
@@ -762,7 +766,6 @@ export default {
       .then((res) => {
         this.resources = res.data.data.blocks[1].creatives[0].resources;
         this.recommend = res.data.data.blocks[1].creatives.slice(1);
-        console.log(this.resources);
       });
     // 新歌新碟/数字专辑
     axios

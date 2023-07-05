@@ -108,7 +108,7 @@
             :key="item.id"
             class="w-[64.074vw] bg-[#fff] h-[200vw] rounded-[4vw] mt-[5.093vw] mr-[2vw]"
           >
-            <div class="w-[55.193vw] mx-auto h-[196vw]">
+            <div class="w-[60.193vw] mx-auto h-[196vw]">
               <div class="h-[12.87vw] flex items-center border-b">
                 <div class="h-[12.87vw] mr-[3.611vw]">
                   <span class="text-[#283349] text-[1.2vw] leading-[12.87vw]">{{
