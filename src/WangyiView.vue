@@ -215,8 +215,12 @@
           >
             <div class="flex items-center">
               <div class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
+                <img src="../tx.png" alt="" class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
               </div>
-              <p class="pl-[1vw]">用户名</p>
+              <router-link :to="{ path: '/Login' }">
+              <p class="pl-[1vw] text-[1.23vw]">点击登录</p>
+              </router-link>
+              <router-view />
               <Icon icon="ph:caret-right-light" width="15" height="15" />
             </div>
             <div>

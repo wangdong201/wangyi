@@ -1,11 +1,12 @@
 import SearchView from '../SearchView.vue';
 import WangyiView from '../WangyiView.vue';
 import SongSheet from '../SongSheet.vue';
+// import Login from '../Login.vue';
 export default [
   // 路径重定向
   {
     path: '/',
-    redirect: '/WangyiView',
+    redirect: '/Login',
   },
   {
     path: '/WangyiView',
@@ -22,5 +23,9 @@ export default [
   {
     path:'/song',
     component:SongSheet,
-  }
+  },
+  {
+    path:'/Login',
+    component:()=> import('../Login.vue'),
+  },
 ];
