@@ -38,7 +38,7 @@ export default {
     };
   },
   methods: {
-    pollingCheck(key, interval = 100000) {
+    pollingCheck(key, interval = 1000) {
       const timer = setInterval(async () => {
         const res = await checkQrStatus(key);
         if (res.data.code === 800) {
