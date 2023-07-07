@@ -12,13 +12,13 @@
             <Icon icon="basil:menu-solid" width="35" height="35" />
           </div>
           <router-link :to="{ path: '/SearchView' }">
-          <input
-            type="text"   
-            placeholder="男孩别哭"
-            class="border rounded-[5vw] px-4 py-2 w-[75vw] text-center h-[8.7vw] dark:bg-[#2c2e35]"
-          />
-        </router-link>
-        <router-view />
+            <input
+              type="text"
+              placeholder="男孩别哭"
+              class="border rounded-[5vw] px-4 py-2 w-[75vw] text-center h-[8.7vw] dark:bg-[#2c2e35]"
+            />
+          </router-link>
+          <router-view />
           <Icon icon="system-uicons:microphone" width="35" height="35" />
           <Icon
             icon="ei:search"
@@ -65,7 +65,7 @@
             <span>推荐歌单</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblel = !drawerVisiblel,info='推荐歌单'" >
+          <div @click="(drawerVisiblel = !drawerVisiblel), (info = '推荐歌单')">
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -100,7 +100,9 @@
                   </div>
                 </transition>
               </div>
-              <p class="text-[1.2vw] text-[#3E4759] scroll-item line-clamp-2 dark:text-[#fff]">
+              <p
+                class="text-[1.2vw] text-[#3E4759] scroll-item line-clamp-2 dark:text-[#fff]"
+              >
                 {{ resourceData }}
               </p>
             </div>
@@ -121,7 +123,7 @@
             <span>新歌新碟/数字专辑</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblel = !drawerVisiblel,info='新歌新碟'" >
+          <div @click="(drawerVisiblel = !drawerVisiblel), (info = '新歌新碟')">
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -141,7 +143,7 @@
             <span>排行榜</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblel = !drawerVisiblel,info='排行榜'" >
+          <div @click="(drawerVisiblel = !drawerVisiblel), (info = '排行榜')">
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -156,7 +158,7 @@
             <span>热门话题</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblel = !drawerVisiblel,info='热门话题'" >
+          <div @click="(drawerVisiblel = !drawerVisiblel), (info = '热门话题')">
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -198,7 +200,7 @@
             <span>音乐日历</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
-          <div @click="drawerVisiblel = !drawerVisiblel,info='音乐日历'" >
+          <div @click="(drawerVisiblel = !drawerVisiblel), (info = '音乐日历')">
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
         </div>
@@ -215,10 +217,14 @@
           >
             <div class="flex items-center">
               <div class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
-                <img src="../tx.png" alt="" class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
+                <img
+                  src="../tx.png"
+                  alt=""
+                  class="rounded-[50%] w-[7.5vw] h-[7.5vw]"
+                />
               </div>
               <router-link :to="{ path: '/Login' }">
-              <p class="pl-[1vw] text-[1.23vw]">点击登录</p>
+                <p class="pl-[1vw] text-[1.23vw]">点击登录</p>
               </router-link>
               <router-view />
               <Icon icon="ph:caret-right-light" width="15" height="15" />
@@ -413,7 +419,7 @@
               </div>
             </div>
             <div
-              class="flex justify-between items-center w-[67.8vw] h-[12.3vw] mx-auto "
+              class="flex justify-between items-center w-[67.8vw] h-[12.3vw] mx-auto"
             >
               <div class="flex items-center h-[12.3vw]">
                 <Icon
@@ -426,7 +432,7 @@
                 <t-switch
                   :value="switchCheckStatus"
                   @input="(e) => (switchCheckStatus = e)"
-                  class=" dark:bg-[#fc0f0f]"
+                  class="dark:bg-[#fc0f0f]"
                 />
               </div>
             </div>
@@ -619,7 +625,12 @@
         </div>
       </Drawer>
       <!-- 抽屉2 -->
-      <Drawer :visible.sync="drawerVisiblel" direction="btt" width="100vw" :title="info">
+      <Drawer
+        :visible.sync="drawerVisiblel"
+        direction="btt"
+        width="100vw"
+        :title="info"
+      >
         <div
           class="w-[100%] dark:bg-[#2C2C36] dark:text-[#E6E4E8] overflow-hidden"
         >
@@ -657,6 +668,7 @@ import SongView from './HomeView/SongView.vue';
 import RakingView from './HomeView/RakingView.vue';
 import McView from './HomeView/McView.vue';
 import Drawer from './components/Drawer.vue';
+import store from 'storejs';
 export default {
   comments: {
     BannersView,
@@ -669,7 +681,7 @@ export default {
   },
   data() {
     return {
-      switchCheckStatus: false,
+      switchCheckStatus: null,
       drawerVisible: false,
       drawerVisiblel: false,
       visible: true,
@@ -682,7 +694,7 @@ export default {
       visibleAA: 0,
       resourceData: '',
       resources: [],
-      info:''
+      info: '',
     };
   },
   mounted() {
@@ -698,8 +710,8 @@ export default {
   },
   methods: {
     songDetails(id) {
-         console.log(id)  
-         this.$router.push({ path: '/song', query: { id } });
+      console.log(id);
+      this.$router.push({ path: '/song', query: { id } });
     },
     animateItems() {
       setInterval(() => {
@@ -740,6 +752,7 @@ export default {
     },
   },
   created() {
+    this.switchCheckStatus = store.get('switch');
     // 轮播
     axios
       .get(

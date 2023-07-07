@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import store from 'storejs';
 export default {
   model: {
     prop: 'value',
@@ -26,6 +27,7 @@ export default {
   methods: {
     toggle() {
       this.$emit('input', !this.value);
+      store.set('switch', !this.value);
     },
   },
 };
