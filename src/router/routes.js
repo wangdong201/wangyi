@@ -6,7 +6,7 @@ export default [
   // 路径重定向
   {
     path: '/',
-    redirect: '/Login',
+    redirect: '/WangyiView',
   },
   {
     path: '/WangyiView',

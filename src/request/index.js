@@ -27,6 +27,11 @@ export async function fetchSeachList() {
 // 头
 export const songDetails = (params) =>
   http.get(`/playlist/detail?id=${params}`);
+
+  // 获取默认搜索关键词
+export const fetchSearchDefault = () => http.get('/search/default');
+export const fetchSearchResult = (params) => http.get('/cloudsearch', { params });
+
 //歌单列表详情
 export const songInfo = (params) =>
   http.get(`/playlist/track/all?id=${params}`);
