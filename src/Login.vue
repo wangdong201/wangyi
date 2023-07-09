@@ -101,7 +101,9 @@ export default {
         } else if (res.data.code === 803) {
           this.$router.push('/WangyiView');
           clearInterval(timer);
-          // store.set('__m__cookie',res.data.cookie)
+          store.set('__m__cookie', res.data.cookie);
+          const userData = await getUserDetail(user.data.account.id);
+          store.set('__m__UserData', userData.data);
         }
       }, interval);
 

@@ -21,11 +21,15 @@ export default [
     component: SongSheet,
   },
   {
-    path:'/song',
-    component:SongSheet,
+    path: '/song',
+    component: SongSheet,
   },
   {
-    path:'/Login',
-    component:()=> import('../Login.vue'),
+    path: '/Login',
+    component: () => import('../Login.vue'),
+  },
+  {
+    path: '/Personal',
+    component: () => import('../Personal'),
   },
 ];

@@ -216,15 +216,19 @@
             class="overflow-hidden w-[76.6vw] mx-auto h-[10vw] flex items-center justify-between fixed bg-[#fff] dark:bg-gray-900"
           >
             <div class="flex items-center">
-              <div class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
-                <img
-                  src="../tx.png"
-                  alt=""
-                  class="rounded-[50%] w-[7.5vw] h-[7.5vw]"
-                />
-              </div>
+              <router-link :to="{ path: '/Personal' }">
+                <div class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
+                  <img
+                     :src="user.avatarUrl"
+                    alt=""
+                    class="rounded-[50%] w-[7.5vw] h-[7.5vw]"
+                  />
+                </div>
+              </router-link>
+              <router-view />
+
               <router-link :to="{ path: '/Login' }">
-                <p class="pl-[1vw] text-[1.23vw]">点击登录</p>
+                <p class="pl-[1vw] text-[1.23vw]">{{user.nickname}}</p>
               </router-link>
               <router-view />
               <Icon icon="ph:caret-right-light" width="15" height="15" />
@@ -669,6 +673,7 @@ import RakingView from './HomeView/RakingView.vue';
 import McView from './HomeView/McView.vue';
 import Drawer from './components/Drawer.vue';
 import store from 'storejs';
+import { getUserAccount } from './request';
 export default {
   comments: {
     BannersView,
@@ -695,6 +700,8 @@ export default {
       resourceData: '',
       resources: [],
       info: '',
+      user: [],
+      userData: [],
     };
   },
   mounted() {
@@ -815,6 +822,11 @@ export default {
       .then((res) => {
         this.music = res.data.data.calendarEvents.slice(0, 2);
       });
+    const resUser = getUserAccount();
+    store.set('_cookieMusic', resUser.data.profile);
+    this.user = store.get('_cookieMusic');
+    this.userData = store.get('__m__UserData');
+    console.log(this.user);
   },
   components: {
     BannersView,

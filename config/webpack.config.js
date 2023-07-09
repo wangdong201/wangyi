@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
 const { VueLoaderPlugin } = require('vue-loader');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 module.exports = {
   entry: './src/index.js',
@@ -13,6 +13,12 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.jsx?$/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
       {
         test: /\.template$/,
         use: {
@@ -58,6 +64,7 @@ module.exports = {
       vue: 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, '../src'),
     },
+    extensions:['.js','.json','.jsx']
   },
   // externals: {
   //   vue: 'Vue',
@@ -93,7 +100,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new CopyPlugin({
       patterns: [
-        { from: "./src/static", to: "./static" },
+        { from: './src/static', to: './static' },
         // { from: "other", to: "public" },
       ],
     }),

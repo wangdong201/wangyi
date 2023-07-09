@@ -12,6 +12,9 @@ http.interceptors.request.use(function (config) {
   config.params.cookie = cookie;
   return config;
 });
+export const fetchPlaylistHot = () => http.get('/playlist/hot');
+export const fetchPlaylist = (cat) =>
+  http.get('/top/playlist', { params: { cat } });
 
 // 榜单
 export async function fetchSeachList() {
@@ -28,9 +31,10 @@ export async function fetchSeachList() {
 export const songDetails = (params) =>
   http.get(`/playlist/detail?id=${params}`);
 
-  // 获取默认搜索关键词
+// 获取默认搜索关键词
 export const fetchSearchDefault = () => http.get('/search/default');
-export const fetchSearchResult = (params) => http.get('/cloudsearch', { params });
+export const fetchSearchResult = (params) =>
+  http.get('/cloudsearch', { params });
 
 //歌单列表详情
 export const songInfo = (params) =>
@@ -39,7 +43,8 @@ export const songInfo = (params) =>
 export const playlistTrackAll = (id) =>
   http.get('/playlist/track/all', { params: { id } });
 
-export const musicSlider = (params) => http.get(`related/playlist?id=${params}`);
+export const musicSlider = (params) =>
+  http.get(`related/playlist?id=${params}`);
 
 //扫码登录
 export const getQrKey = () => http.get('/login/qr/key');
@@ -50,8 +55,22 @@ export const getQrInfo = (key, qrimg = 1) =>
 export const checkQrStatus = (key) =>
   http.get('/login/qr/check', { params: { key, timestamp: Date.now() } });
 
-export const getUserAccount = () => http.get('/user/account');
-
 //用户详情
 export const getUserDetail = (uid) =>
   http.get('/user/detail', { params: { uid } });
+
+export const getUserAccount = () => http.get('/user/account');
+
+// 收藏歌单
+export const fetchUserPlaylist = (uid) =>
+  http.get('/user/playlist', { params: { uid } });
+//评论
+export const fetchUserHistory = (uid) =>
+  http.get('/user/comment/history', { params: { uid } });
+
+export const myComment = (id) => http.get(`/comment/music?id=${id}`);
+
+//ip
+export const getIPAddr = () => axios.get('https://api.ipify.org?format=json');
+export const ip2Territory = (ip) =>
+  axios.get(`http://ip-api.com/json/${ip}?lang=zh-CN`);
