@@ -75,7 +75,7 @@
   </div>
 </template>
 <script>
-import { getQrKey, getQrInfo, checkQrStatus } from '@/request';
+import { getQrKey, getQrInfo, checkQrStatus,getUserAccount ,getUserDetail } from '@/request';
 import store from 'storejs';
 export default {
   name: 'Login',
@@ -99,11 +99,18 @@ export default {
           this.tert = false;
           this.gent = true;
         } else if (res.data.code === 803) {
-          this.$router.push('/WangyiView');
-          clearInterval(timer);
           store.set('__m__cookie', res.data.cookie);
+
+          const user = await getUserAccount();
+          console.log('用户详情', user.data);
+          store.set('__m__User', user.data); //存用户信息
+
           const userData = await getUserDetail(user.data.account.id);
           store.set('__m__UserData', userData.data);
+          console.log(userData.data)
+          
+          this.$router.push('/WangyiView');
+          clearInterval(timer);
         }
       }, interval);
 

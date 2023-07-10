@@ -219,18 +219,14 @@
               <router-link :to="{ path: '/Personal' }">
                 <div class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
                   <img
-                     :src="user.avatarUrl"
+                    :src="userData.profile.avatarUrl"
                     alt=""
                     class="rounded-[50%] w-[7.5vw] h-[7.5vw]"
                   />
                 </div>
               </router-link>
               <router-view />
-
-              <router-link :to="{ path: '/Login' }">
-                <p class="pl-[1vw] text-[1.23vw]">{{user.nickname}}</p>
-              </router-link>
-              <router-view />
+                <p class="pl-[1vw] text-[1.23vw]">{{ userData.profile.nickname }}</p>
               <Icon icon="ph:caret-right-light" width="15" height="15" />
             </div>
             <div>
@@ -624,7 +620,16 @@
           <div
             class="w-[76.6vw] h-[12.8vw] mx-auto mt-[3.7vw] bg-[#FFFFFF] rounded-[3vw] text-[#ff3a3a] dark:bg-[#2c2c2c] dark:text-[#ff3a3a]"
           >
-            <p class="text-center leading-[12.8vw]">退出登录/关闭</p>
+            <p
+              @click="LoginFn"
+              v-if="userName === ''"
+              class="text-center leading-[12.8vw]"
+            >
+              立即登录
+            </p>
+            <p @click="dialogFn" v-else class="text-center leading-[12.8vw]">
+              退出登录/关闭
+            </p>
           </div>
         </div>
       </Drawer>
@@ -673,7 +678,7 @@ import RakingView from './HomeView/RakingView.vue';
 import McView from './HomeView/McView.vue';
 import Drawer from './components/Drawer.vue';
 import store from 'storejs';
-import { getUserAccount } from './request';
+import Dialog from './components/Dialog';
 export default {
   comments: {
     BannersView,
@@ -700,8 +705,9 @@ export default {
       resourceData: '',
       resources: [],
       info: '',
-      user: [],
       userData: [],
+      user: [],
+      userName: '',
     };
   },
   mounted() {
@@ -716,6 +722,22 @@ export default {
     this.bs.destroy();
   },
   methods: {
+    LoginFn() {
+      this.$router.push('/Login');
+    },
+    dialogFn() {
+      Dialog({ title: '网易云音乐', message: '确定退出当前账号吗？' })
+        .then(() => {
+          // console.log('点击了确定');
+          store.remove('__m__cookie');
+          store.remove('_cookieMusic');
+          this.$router.push('/Login');
+        })
+        .catch(function () {
+          console.log('点击了取消');
+        });
+    },
+
     songDetails(id) {
       console.log(id);
       this.$router.push({ path: '/song', query: { id } });
@@ -798,7 +820,6 @@ export default {
       )
       .then((res) => {
         this.song = res.data.data.blocks[5].creatives;
-        console.log(this.song);
       })
       .catch((err) => {
         console.log(err);
@@ -822,11 +843,12 @@ export default {
       .then((res) => {
         this.music = res.data.data.calendarEvents.slice(0, 2);
       });
-    const resUser = getUserAccount();
-    store.set('_cookieMusic', resUser.data.profile);
-    this.user = store.get('_cookieMusic');
     this.userData = store.get('__m__UserData');
-    console.log(this.user);
+    console.log(this.userData);
+    this.userName = this.userData.profile.nickname;
+    console.log(this.userName);
+    this.user = store.get('_cookieMusic');
+    
   },
   components: {
     BannersView,

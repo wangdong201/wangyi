@@ -6,7 +6,7 @@ export default [
   // 路径重定向
   {
     path: '/',
-    redirect: '/WangyiView',
+    redirect: '/Material',
   },
   {
     path: '/WangyiView',
@@ -31,5 +31,9 @@ export default [
   {
     path: '/Personal',
     component: () => import('../Personal'),
+  },
+  {
+    path: '/Material',
+    component: () => import('../Material'),
   },
 ];
