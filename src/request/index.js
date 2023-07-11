@@ -71,3 +71,9 @@ export const fetchUserPlaylist = (uid) =>
   http.get('/user/playlist', { params: { uid } });
 
 export const myComment = (id) => http.get(`/comment/music?id=${id}`);
+
+// 播放
+export const getMP3 = (id) =>
+  http.get('/song/url/v1', { params: { id, level: 'standard' } });
+export const getTrackDetail = (id) =>
+  http.get('/song/detail', { params: { ids: id } });

@@ -215,7 +215,7 @@
           <div
             class="overflow-hidden w-[76.6vw] mx-auto h-[10vw] flex items-center justify-between fixed bg-[#fff] dark:bg-gray-900"
           >
-            <div class="flex items-center">
+            <div class="flex items-center pl-[2vw]">
               <router-link :to="{ path: '/Personal' }">
                 <div class="rounded-[50%] w-[7.5vw] h-[7.5vw]">
                   <img
@@ -230,7 +230,7 @@
               <Icon icon="ph:caret-right-light" width="15" height="15" />
             </div>
             <div>
-              <Icon icon="tabler:scan" width="35" class="text-[#000]" />
+              <Icon icon="tabler:scan" width="25" class="text-[#000]" />
             </div>
           </div>
         </template>
@@ -262,7 +262,6 @@
               <p class="text-[#998783] text-[1.2vw]">
                 您的黑胶VIP即将到期,点击立即续费
               </p>
-              <!-- <div class="w-[5.8vw] h-[5.8vw] bg-pink-400"></div> -->
             </div>
           </div>
           <!-- 我的消息 -->
@@ -857,6 +856,7 @@ export default {
     SongView,
     RakingView,
     McView,
+    
   },
 };
 </script>

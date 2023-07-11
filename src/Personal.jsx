@@ -65,7 +65,10 @@ export default {
               </div>
               {/* 编辑资料 */}
               <div class="flex justify-center mt-[3.056vw] items-center">
-                <span class="text-[3.2vw] border h-[7.5vw] w-[21.204vw] text-center leading-[7.5vw] border-[#ccc] rounded-[4vw] mr-[1.974vw]" onClick={() => this.$router.push('/Material')}>
+                <span
+                  class="text-[3.2vw] border h-[7.5vw] w-[21.204vw] text-center leading-[7.5vw] border-[#ccc] rounded-[4vw] mr-[1.974vw]"
+                  onClick={() => this.$router.push('/Material')}
+                >
                   编辑资料
                 </span>
                 <div class="w-[7.5vw] h-[7.5vw] rounded-[50%] border border-[#ccc] flex items-center justify-center">
@@ -152,7 +155,7 @@ export default {
                               />
                             </div>
                             <div class="">
-                              <p class=" whitespace-nowrap overflow-hidden">
+                              <p class=" whitespace-nowrap overflow-hidden text-[2vw]">
                                 {item.name}
                               </p>
                               <p class="text-[1.2vw] whitespace-nowrap overflow-hidden text-[#ccc]">
@@ -184,7 +187,7 @@ export default {
                               />
                             </div>
                             <div class="overflow-hidden">
-                              <p class=" whitespace-nowrap overflow-hidden">
+                              <p class=" whitespace-nowrap text-[2vw] w-[61vw] truncate">
                                 {item.name}
                               </p>
                               <p class="text-[1.2vw] whitespace-nowrap overflow-hidden text-[#ccc]">
@@ -267,6 +270,7 @@ export default {
         return playVolume;
       }
     },
+   
   },
   async created() {
     this.user = store.get('_cookieMusic');

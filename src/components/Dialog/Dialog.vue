@@ -1,7 +1,7 @@
 <template>
     <div
       v-show="visible"
-      class="w-[320px] fixed top-[50%] left-[50%] text-[16px] rounded-[12px] bg-gray-300 translate-x-[-50%] translate-y-[-40%]"
+      class="w-[320px] fixed top-[50%] left-[50%] text-[16px] rounded-[12px] bg-gray-300 translate-x-[-50%] translate-y-[-40%] z-[1001]"
     >
       <div class="pt-[26px] font-medium leading-[24px] text-center">
         {{ title }}

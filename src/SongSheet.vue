@@ -2,10 +2,10 @@
   <div :class="{ dark: switchCheckStatus }">
     <div class="w-screen">
       <div
-        class="fixed z-40 bg-[#597BA0] top-0 w-screen h-[7.5vw] dark:bg-[#30595F] dark:text-[#fff]"
+        class="fixed z-40 bg-[#597BA0] top-0 w-screen h-[9.5vw] dark:bg-[#30595F] dark:text-[#fff]"
       >
         <div
-          class="flex justify-between text-[#fff] w-[92.6vw] bg-[#597BA0] mx-auto dark:bg-[#30595F] dark:text-[#fff]"
+          class="flex justify-between text-[#fff] w-[92.6vw] bg-[#597BA0] mx-auto dark:bg-[#30595F] dark:text-[#fff] h-[9.5vw] items-center"
         >
           <div class="flex w-[21.4vw] justify-between">
             <router-link :to="{ path: '/WangyiView' }">
@@ -24,7 +24,7 @@
         <div class="w-[92.6vw] mx-auto">
           <!-- ----------- -->
           <div v-if="terent">
-            <div class="h-[27.8vw] mt-[7.5vw] flex justify-between text-[#fff]">
+            <div class="h-[27.8vw] mt-[9.5vw] flex justify-between text-[#fff]">
               <div class="w-[25.7vw] h-[25.7vw] relative">
                 <img
                   :src="songList.coverImgUrl"
@@ -91,7 +91,7 @@
           </div>
           <div v-if="display" class="dark:bg-[#30595F] dark:text-[#fff]">
             <p
-              class="flex pl-[4vw] pr-[4vw] mt-[7vw]"
+              class="flex pl-[4vw] pr-[4vw] mt-[9vw]"
               style="justify-content: space-between"
             >
               <span class="text-[2vw] text-[#aba59d]"
@@ -177,7 +177,7 @@
                 <div
                   class="w-[5.4vw] h-[5.4vw] rounded-[50%] bg-[#ff4937] flex items-center justify-center text-[#fff]"
                 >
-                  <Icon icon="basil:play-solid" width="15" height="15" />
+                  <Icon @click.native="playAll" icon="basil:play-solid" width="15" height="15" />
                 </div>
                 <p class="whitespace-nowrap">播放全部</p>
                 <p class="whitespace-nowrap">
@@ -195,8 +195,8 @@
               v-for="(item, index) in songList1"
               :key="item.id"
             >
-              <div class="flex justify-between items-center">
-                <div class="flex items-center">
+              <div class="flex justify-between items-center" @click="playAdd(item)">
+                <div class="flex items-center" >
                   <div class="w-[7.8vw]">
                     <p>{{ index + 1 }}</p>
                   </div>
@@ -272,7 +272,9 @@ export default {
     });
     songInfo(this.$route.query.id).then((res) => {
       this.songList1 = res.data.songs;
+      console.log(this.songList1);
     });
+    
     musicSlider(this.$route.query.id).then((res) => {
       this.music = res.data.playlists;
     });
@@ -280,6 +282,22 @@ export default {
     this.switchCheckStatus = store.get('switch');
   },
   methods: {
+    playAll(){
+      window.$player.replacePlaylist(
+        this.songList1.map((song)=>song.id),
+        '',
+        '',
+      );
+    },
+    playAdd(item) {
+      window.$player.replacePlaylist(
+        this.songList1.map((song) => song.id),
+        '',
+        '',
+        item.id
+      );
+      console.log(item.id);
+    },
     lb() {
       this.terent = !this.terent;
       this.display = !this.display;
@@ -294,7 +312,7 @@ export default {
 <style>
 .sticky {
   position: sticky;
-  top: 5.3vw;
+  top: 9.2vw;
   background: #fff;
 }
 
