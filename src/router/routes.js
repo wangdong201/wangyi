@@ -6,7 +6,7 @@ export default [
   // 路径重定向
   {
     path: '/',
-    redirect: '/Material',
+    redirect: '/WangyiView',
   },
   {
     path: '/WangyiView',
@@ -20,10 +20,10 @@ export default [
     path: '/SongSheet',
     component: SongSheet,
   },
-  {
-    path: '/song',
-    component: SongSheet,
-  },
+  // {
+  //   path: '/song',
+  //   component: SongSheet,
+  // },
   {
     path: '/Login',
     component: () => import('../Login.vue'),
@@ -35,5 +35,9 @@ export default [
   {
     path: '/Material',
     component: () => import('../Material'),
+  },
+  {
+    path: '/MusicPlayback',
+    component: () => import('../MusicPlayback.vue'),
   },
 ];

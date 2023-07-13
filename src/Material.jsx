@@ -117,7 +117,6 @@ export default {
             </div>
           </div>
           {/* 日期 */}
-          {/* <van-calendar v-model={this.dayShow} confirm={this.onConfirm}></van-calendar> */}
           <van-popup
             v-model={this.currentDateShow1}
             position="bottom"

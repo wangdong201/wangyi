@@ -226,7 +226,9 @@
                 </div>
               </router-link>
               <router-view />
-                <p class="pl-[1vw] text-[1.23vw]">{{ userData.profile.nickname }}</p>
+              <p class="pl-[1vw] text-[1.23vw]">
+                {{ userData.profile.nickname }}
+              </p>
               <Icon icon="ph:caret-right-light" width="15" height="15" />
             </div>
             <div>
@@ -847,7 +849,6 @@ export default {
     this.userName = this.userData.profile.nickname;
     console.log(this.userName);
     this.user = store.get('_cookieMusic');
-    
   },
   components: {
     BannersView,
@@ -856,7 +857,6 @@ export default {
     SongView,
     RakingView,
     McView,
-    
   },
 };
 </script>

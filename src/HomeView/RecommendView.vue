@@ -31,7 +31,7 @@ export default {
   methods: {
     songDetails(id) {
       console.log(id);
-      this.$router.push({ path: '/song', query: { id } });
+      this.$router.push({ path: '/SongSheet', query: { id } });
     },
   },
 };

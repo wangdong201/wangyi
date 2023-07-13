@@ -177,7 +177,12 @@
                 <div
                   class="w-[5.4vw] h-[5.4vw] rounded-[50%] bg-[#ff4937] flex items-center justify-center text-[#fff]"
                 >
-                  <Icon @click.native="playAll" icon="basil:play-solid" width="15" height="15" />
+                  <Icon
+                    @click.native="playAll"
+                    icon="basil:play-solid"
+                    width="15"
+                    height="15"
+                  />
                 </div>
                 <p class="whitespace-nowrap">播放全部</p>
                 <p class="whitespace-nowrap">
@@ -195,8 +200,11 @@
               v-for="(item, index) in songList1"
               :key="item.id"
             >
-              <div class="flex justify-between items-center" @click="playAdd(item)">
-                <div class="flex items-center" >
+              <div
+                class="flex justify-between items-center"
+                @click="playAdd(item)"
+              >
+                <div class="flex items-center">
                   <div class="w-[7.8vw]">
                     <p>{{ index + 1 }}</p>
                   </div>
@@ -218,12 +226,12 @@
                   </div>
                 </div>
                 <div class="flex w-[15.3vw] justify-between">
-                  <span class=""
-                    ><Icon
-                      icon="gg:play-button-r"
-                      color="#b2b2b2"
+                  <span class="">
+                    <Icon
+                      icon="bi:play-btn"
                       width="20"
                       height="20"
+                      color="#b2b2b2"
                   /></span>
                   <span
                     ><Icon
@@ -266,15 +274,18 @@ export default {
   async created() {
     this.data = await playlistTrackAll(
       this.$route.query.id.replace(':id=', '')
-    );
+    ); 
     songDetails(this.$route.query.id).then((res) => {
       this.songList = res.data.playlist;
+      
+      
     });
     songInfo(this.$route.query.id).then((res) => {
       this.songList1 = res.data.songs;
+      store.set('songInfoMusic', this.data.data.songs);
       console.log(this.songList1);
     });
-    
+
     musicSlider(this.$route.query.id).then((res) => {
       this.music = res.data.playlists;
     });
@@ -282,11 +293,11 @@ export default {
     this.switchCheckStatus = store.get('switch');
   },
   methods: {
-    playAll(){
+    playAll() {
       window.$player.replacePlaylist(
-        this.songList1.map((song)=>song.id),
+        this.songList1.map((song) => song.id),
         '',
-        '',
+        ''
       );
     },
     playAdd(item) {
@@ -296,7 +307,6 @@ export default {
         '',
         item.id
       );
-      console.log(item.id);
     },
     lb() {
       this.terent = !this.terent;

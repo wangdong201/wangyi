@@ -84,6 +84,12 @@ export default {
                 <div class="w-[22.87vw] text-[#8E95A0] text-center">动态</div>
                 <div class="w-[22.87vw] text-[#8E95A0] text-center">播客</div>
               </div>
+              {/* <van-tabs v-model={this.active} class="bg-[#F1F1F1]" >
+                <van-tab title="主页" class="bg-[#F1F1F1]"></van-tab>
+                <van-tab title="动态" class="bg-[#F1F1F1]"></van-tab>
+                <van-tab title="播客" class="bg-[#F1F1F1]"></van-tab>
+              </van-tabs> */}
+              
 
               <div>
                 {/* 音乐品味 */}
@@ -245,6 +251,7 @@ export default {
       create: [],
       myLove: '',
       areaList,
+      active: 2,
     };
   },
   methods: {
@@ -270,7 +277,6 @@ export default {
         return playVolume;
       }
     },
-   
   },
   async created() {
     this.user = store.get('_cookieMusic');
