@@ -671,15 +671,15 @@
 <script>
 import BScroll from '@better-scroll/core';
 import axios from 'axios';
-import BannersView from './HomeView/BannersView.vue';
-import Topview from './HomeView/Topview.vue';
-import RecommendView from './HomeView/RecommendView.vue';
-import SongView from './HomeView/SongView.vue';
-import RakingView from './HomeView/RakingView.vue';
-import McView from './HomeView/McView.vue';
-import Drawer from './components/Drawer.vue';
+import BannersView from '../HomeView/BannersView.vue';
+import Topview from '../HomeView/Topview.vue';
+import RecommendView from '../HomeView/RecommendView.vue';
+import SongView from '../HomeView/SongView.vue';
+import RakingView from '../HomeView/RakingView.vue';
+import McView from '../HomeView/McView.vue';
+import Drawer from '../components/Drawer.vue';
 import store from 'storejs';
-import Dialog from './components/Dialog';
+import Dialog from '../components/Dialog';
 export default {
   comments: {
     BannersView,

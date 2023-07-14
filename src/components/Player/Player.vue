@@ -3,25 +3,34 @@
     <div
       class="w-screen px-[4.5vw] bg-[#F9F9FA] h-[12.5vw] border-b-[1px] border-[#F5F8FA] flex items-center"
     >
-    <router-link :to="{ path: '/MusicPlayback' }">
-      <div class="w-[10vw] h-[10vw] relative flex items-center justify-center">
-        <img src="/static/01.png" alt="" class="absolute top-0 left-0 z-[1]" />
-        <img
-          class="w-[7vw] h-[7vw] rounded-[50%]"
-          :src="Player._currentTrack?.al?.picUrl"
-          alt=""
-          :class="{ 'w-[7vw] h-[7vw] rounded-[50%] rotate': !play }"
-        />
-      </div>
-    </router-link>
+      <router-link :to="{ path: '/MusicPlayback' }">
+        <div
+          class="w-[10vw] h-[10vw] relative flex items-center justify-center rotateAnimation"
+          :class="{ 'paused-animation': !this?.$player?._playing }"
+        >
+          <img
+            src="/static/01.png"
+            alt=""
+            class="absolute top-0 left-0 z-[1]"
+          />
+          <img
+            class="w-[7vw] h-[7vw] rounded-[50%] "
+            :src="this.$player._currentTrack?.al?.picUrl"
+            alt=""
+           
+          />
+        </div>
+      </router-link>
       <div
         class="text-[3vw] w-[60vw] text-ellipsis overflow-hidden whitespace-nowrap ml-[2vw]"
       >
-        <span class="text-[#3E485E]">{{ Player._currentTrack.name }}</span>
+        <span class="text-[#3E485E]">{{
+          this.$player._currentTrack.name
+        }}</span>
         <span
           class="text-[#7B8591]"
-          v-if="Array.isArray(Player._currentTrack?.ar)"
-          >-{{ Player._currentTrack.ar[0].name }}</span
+          v-if="Array.isArray(this.$player._currentTrack?.ar)"
+          >-{{ this.$player._currentTrack.ar[0].name }}</span
         >
       </div>
       <div class="w-[5.6vw] h-[5.6vw] relative ml-[2.2vw]">
@@ -35,7 +44,7 @@
           layer-color="#C7CBD2"
         />
         <Icon
-          :icon="`${!play ? 'carbon:pause-filled' : 'bi:play-fill'}`"
+          :icon="`${$player._playing ? 'carbon:pause-filled' : 'ph:play-fill'}`"
           width="11px"
           class="top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] absolute text-[#000]"
           @click.native="playFn"
@@ -118,42 +127,37 @@
 
 <script>
 import store from 'storejs';
-import Player from './player.js';
 export default {
   data() {
     return {
-      Player: new Player(),
       currentRate: 0,
-      play: window.$player?._playing,
       show: false,
       music: [],
+      isRotating: false, // 控制旋转状态
     };
   },
   methods: {
     playFn() {
-      this.play = !this.play;
-      window.$player.playOrPause();
-    },
-    toggleAnimation() {
-      this.play = !this.play; // 切换动画状态
+      this.$player.playOrPause();
     },
     showPopup() {
       this.show = true;
     },
   },
   created() {
-    window.$player = this.Player;
     this.music = store.get('songInfoMusic');
-    // console.log(this.music);
   },
 };
 </script>
 <style>
-.rotate {
-  animation: rotateAnimation 5s linear infinite;
+.rotateAnimation {
+  animation: rotate 5s linear infinite;
+}
+.paused-animation {
+  animation-play-state: paused;
 }
 
-@keyframes rotateAnimation {
+@keyframes rotate  {
   from {
     transform: rotate(0deg);
   }
@@ -161,4 +165,5 @@ export default {
     transform: rotate(360deg);
   }
 }
+
 </style>

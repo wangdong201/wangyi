@@ -1,5 +1,5 @@
 import SearchView from '../SearchView.vue';
-import WangyiView from '../WangyiView.vue';
+import WangyiView from '../view/WangyiView.vue';
 import SongSheet from '../SongSheet.vue';
 // import Login from '../Login.vue';
 export default [
@@ -39,5 +39,9 @@ export default [
   {
     path: '/MusicPlayback',
     component: () => import('../MusicPlayback.vue'),
+  },
+  {
+    path: '/Player',
+    component: () => import('../components/Player'),
   },
 ];

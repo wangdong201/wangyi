@@ -7,6 +7,8 @@ import Drawer from './components/Drawer.vue';
 import { Swipe, SwipeItem,Popup,Circle,Area,DatetimePicker,Tab, Tabs} from 'vant';
 import 'vant/lib/index.css';
 import Switch from './components/Switch.vue';
+import Player from './components/Player';
+Vue.use(Player)
 Vue.component('t-switch', Switch);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
