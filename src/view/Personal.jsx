@@ -1,7 +1,7 @@
 import styled from 'styled-components-vue';
 import { areaList } from '@vant/area-data';
 import store from 'storejs';
-import { getIPAddr, ip2Territory, fetchUserPlaylist } from './request';
+import { getIPAddr, ip2Territory, fetchUserPlaylist } from '../request';
 const Wrapper = styled.div``;
 
 export default {

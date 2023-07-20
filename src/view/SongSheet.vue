@@ -7,12 +7,13 @@
         <div
           class="flex justify-between text-[#fff] w-[92.6vw] bg-[#597BA0] mx-auto dark:bg-[#30595F] dark:text-[#fff] h-[9.5vw] items-center"
         >
-          <div class="flex w-[21.4vw] justify-between">
+          <div class="flex w-[46.4vw] justify-between items-center">
             <router-link :to="{ path: '/WangyiView' }">
               <Icon icon="mdi:arrow-left" width="20" height="20" />
             </router-link>
             <router-view />
-            <p class="text-[2.5vw] whitespace-no-wrap">歌单</p>
+            <!-- <p class="text-[2.5vw] whitespace-no-wrap">{{ songList.name }}</p> -->
+            <van-notice-bar scrollable class="w-[40vw] text-[2vw] van_nte">{{ songList.name }}</van-notice-bar>
           </div>
           <div class="flex justify-between w-[16.3vw]">
             <Icon icon="material-symbols:search" width="20" height="20" />
@@ -257,7 +258,7 @@ import {
   songInfo,
   playlistTrackAll,
   musicSlider,
-} from './request';
+} from '../request';
 
 export default {
   data() {
@@ -274,11 +275,9 @@ export default {
   async created() {
     this.data = await playlistTrackAll(
       this.$route.query.id.replace(':id=', '')
-    ); 
+    );
     songDetails(this.$route.query.id).then((res) => {
       this.songList = res.data.playlist;
-      
-      
     });
     songInfo(this.$route.query.id).then((res) => {
       this.songList1 = res.data.songs;
@@ -329,5 +328,12 @@ export default {
 .lunbo::-webkit-scrollbar {
   height: 0px;
   width: 20px;
+}
+
+.van-notice-bar__wrap,.van_nte.van-notice-bar{
+  background-color: #597BA0;
+  height: 9.4vw;
+  color: #fff;
+  font-size: 2vw;
 }
 </style>

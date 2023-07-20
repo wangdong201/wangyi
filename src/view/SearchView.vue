@@ -188,7 +188,7 @@ import {
   fetchSeachList,
   fetchSearchDefault,
   fetchSearchResult,
-} from './request/index';
+} from '../request';
 import store from 'storejs';
 import _ from 'lodash';
 export default {

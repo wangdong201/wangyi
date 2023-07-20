@@ -1,6 +1,6 @@
-import SearchView from '../SearchView.vue';
+import SearchView from '../view/SearchView.vue';
 import WangyiView from '../view/WangyiView.vue';
-import SongSheet from '../SongSheet.vue';
+import SongSheet from '../view/SongSheet.vue';
 // import Login from '../Login.vue';
 export default [
   // 路径重定向
@@ -26,22 +26,30 @@ export default [
   // },
   {
     path: '/Login',
-    component: () => import('../Login.vue'),
+    component: () => import('../view/Login.vue'),
   },
   {
     path: '/Personal',
-    component: () => import('../Personal'),
+    component: () => import('../view/Personal'),
   },
   {
     path: '/Material',
-    component: () => import('../Material'),
+    component: () => import('../view/Material'),
   },
   {
     path: '/MusicPlayback',
-    component: () => import('../MusicPlayback.vue'),
+    component: () => import('../view/MusicPlayback.vue'),
   },
   {
     path: '/Player',
     component: () => import('../components/Player'),
+  },
+  {
+    path: '/Mv',
+    component: () => import('../view/Mv.vue'),
+  },
+  {
+    path: '/PlayMv/:id',
+    component: () => import('../view/PlayMv.vue'),
   },
 ];

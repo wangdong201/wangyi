@@ -139,10 +139,12 @@
         class="mt-[5vw] w-[89.5vw] mx-auto overflow-hidden bg-[#F8F9FD] rounded-[3vw] dark:bg-gray-900"
       >
         <div class="flex items-center justify-between">
+          <router-link :to="{ path: '/Mv' }">
           <div class="flex items-center">
             <span>排行榜</span>
             <Icon icon="ph:caret-right-light" width="15" height="15" />
           </div>
+        </router-link>
           <div @click="(drawerVisiblel = !drawerVisiblel), (info = '排行榜')">
             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
           </div>
@@ -664,6 +666,10 @@
           </div>
         </div>
       </Drawer>
+      <!-- 底部导航栏 -->
+      <!-- <div class=" h-[14vw] bg-[#000] mt-[30vw] fixed bottom-0">
+
+      </div> -->
     </div>
   </div>
 </template>

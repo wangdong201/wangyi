@@ -1,6 +1,9 @@
 import { Howl, Howler } from 'howler';
-import { getTrackDetail, getMP3 } from '../../request';
+import { getTrackDetail, getMP3,lyricText } from '../../request';
 import Player from './Player.vue';
+import Lyric from "lyric-parser";
+
+let lyricPlayer = null;
 
 export default class {
   constructor() {
@@ -50,6 +53,17 @@ export default class {
     return this._duration;
   }
 
+  async initLyricPlayer(trackId){
+    console.log(trackId);
+    const res = await lyricText(trackId);
+    lyricPlayer = new Lyric(res.data.lrc.lyric, ({lineNum, txt}) => {
+        this.lineIndex = lineNum;// 索引
+        if(lineNum > 4) this.lineHieght = (lineNum - 3) * 12 - 20;
+    });
+    this.lyricLines = lyricPlayer.lines
+}
+
+
   _init() {
     Howler.autoUnlock = false;
     Howler.usingWebAudio = true;
@@ -72,6 +86,12 @@ export default class {
     autoplay = true,
     ifUnplayableThen = 'playNextTrack'
   ) {
+    if(lyricPlayer) lyricPlayer.stop();
+     //歌词
+     this.initLyricPlayer(id).then(() => {
+      lyricPlayer.play();
+      this.lineHieght = -20;
+  });
     return getTrackDetail(id).then((data) => {
       const track = data.data.songs[0];
       this._currentTrack = track;

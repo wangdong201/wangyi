@@ -3,7 +3,7 @@
     <div
       class="w-screen px-[4.5vw] bg-[#F9F9FA] h-[12.5vw] border-b-[1px] border-[#F5F8FA] flex items-center"
     >
-      <router-link :to="{ path: '/MusicPlayback' }">
+      
         <div
           class="w-[10vw] h-[10vw] relative flex items-center justify-center rotateAnimation"
           :class="{ 'paused-animation': !this?.$player?._playing }"
@@ -11,16 +11,15 @@
           <img
             src="/static/01.png"
             alt=""
-            class="absolute top-0 left-0 z-[1]"
+            class="w-[10vw] h-[10vw]"
           />
           <img
-            class="w-[7vw] h-[7vw] rounded-[50%] "
+            class="w-[7vw] h-[7vw] rounded-[50%] absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"
             :src="this.$player._currentTrack?.al?.picUrl"
             alt=""
-           
           />
         </div>
-      </router-link>
+        <router-link :to="{ path: '/MusicPlayback' }">
       <div
         class="text-[3vw] w-[60vw] text-ellipsis overflow-hidden whitespace-nowrap ml-[2vw]"
       >
@@ -33,6 +32,7 @@
           >-{{ this.$player._currentTrack.ar[0].name }}</span
         >
       </div>
+    </router-link>
       <div class="w-[5.6vw] h-[5.6vw] relative ml-[2.2vw]">
         <van-circle
           v-model="currentRate"
@@ -149,7 +149,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .rotateAnimation {
   animation: rotate 5s linear infinite;
 }

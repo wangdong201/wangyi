@@ -14,7 +14,7 @@
     <!-- 未登录 -->
     <div v-if="tert">
       <div class="w-[38.8vw] h-[7.5vw] mx-auto mt-[13.8vw]">
-        <img src="./static/logo.fill.svg" alt="" />
+        <img src='../static/logo.fill.svg' alt="" />
       </div>
       <div class="w-[39.6vw] h-[39.6vw] mx-auto mt-[9.5vw]">
         <img :src="qrcode" alt="" />
@@ -30,10 +30,10 @@
     <!-- 扫码成功 -->
     <div v-if="gent">
       <div class="w-[38.8vw] h-[25.5vw] mx-auto mt-[13.8vw]">
-        <img src="./static/logo.fill.svg" alt="" />
+        <img src='../static/logo.fill.svg' alt="" />
       </div>
       <div class="w-[38.7vw] mx-auto">
-        <img src="./static/05.png" alt="" />
+        <img src='../static/05.png' alt="" />
       </div>
       <div
         class="w-[19.2vw] mx-auto whitespace-nowrap text-[5.2vw] mt-[10.8vw]"
@@ -47,7 +47,7 @@
     <!-- 二维码失效 -->
     <div v-if="roune">
       <div class="w-[38.8vw] h-[7.5vw] mx-auto mt-[13.8vw]">
-        <img src="./static/logo.fill.svg" alt="" />
+        <img src='../static/logo.fill.svg' alt="" />
       </div>
       <div class="w-[39.6vw] h-[39.6vw] mx-auto mt-[9.5vw] relative">
         <img :src="qrcode" alt="" />
@@ -70,7 +70,7 @@
     </div>
 
     <div class="bottom-0 absolute">
-      <img src="./static/04.png" alt="" />
+      <img src='../static/04.png' alt="" />
     </div>
   </div>
 </template>

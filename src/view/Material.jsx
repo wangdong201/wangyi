@@ -1,7 +1,8 @@
 import store from 'storejs';
 import styled from 'styled-components-vue';
 import { areaList } from '@vant/area-data';
-import {} from './request';
+import { getUpdate, getUserAccount, getUserDetail } from '../request';
+import { comment } from 'postcss';
 const Wrapper = styled.div``;
 export default {
   render() {
@@ -27,7 +28,7 @@ export default {
                 <div class="h-[16.111vw] flex border-b items-center justify-between">
                   <p>头像</p>
                   <img
-                    src={this.userData.profile.avatarUrl}
+                    src={this.userDetail.avatarUrl}
                     alt=""
                     class="w-[11.481vw] h-[11.481vw] rounded-[50%]"
                   />
@@ -35,7 +36,7 @@ export default {
                 <div class="h-[12.111vw] flex border-b items-center justify-between">
                   <p>昵称</p>
                   <p class="whitespace-nowrap text-[2vw] text-[#999999]">
-                    {this.userData.profile.nickname}
+                    {this.userDetail.nickname}
                   </p>
                 </div>
                 <div
@@ -44,7 +45,7 @@ export default {
                 >
                   <p>性别</p>
                   <p class="whitespace-nowrap text-[2vw] text-[#999999]">
-                    沃尔玛购物袋
+                  {this.sexFn(this.userArr[0])}
                   </p>
                 </div>
                 <div class="h-[12.111vw] flex items-center justify-between">
@@ -76,7 +77,8 @@ export default {
                 >
                   <p>地区</p>
                   <p class="whitespace-nowrap text-[2vw] text-[#999999]">
-                    湖北省 武汉市
+                    {this.areaList.province_list[this.userDetail.province]}{' '}
+                    {this.areaList.city_list[this.userDetail.city]}
                   </p>
                 </div>
                 <div class="h-[12.111vw] flex border-b items-center justify-between">
@@ -127,7 +129,7 @@ export default {
               title="选择年月日"
               min-date={this.minDate}
               max-date={this.maxDate}
-              onConfirm={this.confirm}
+              onConfirm={this.changeDate}
               onCancel={() => (this.currentDateShow = false)}
             />
           </van-popup>
@@ -142,18 +144,13 @@ export default {
               confirm-button-text="完成"
               cancel-button-text="取消"
               area-list={areaList}
-              onConfirm={this.confirm}
+              onConfirm={this.changeArea}
               onCancel={() => (this.popupVisible = false)}
             />
           </van-popup>
-          <van-popup
-            v-model={this.sexShow}
-            class="w-[87vw] h-[27vw] rounded-[3vw] pl-[5.8vw] py-[4.2vw]"
-          >
-            <ul class="" onClick={this.getSex}>
-              <li class="h-[9vw] leading-[9vw]">男</li>
-              <li class="h-[9vw] leading-[9vw]">女</li>
-            </ul>
+          {/* 性别 */}
+          <van-popup v-model={this.sexShow} class="w-[87vw] h-[27vw] rounded-[3vw] pl-[5.8vw] py-[4.2vw]">
+            <van-picker show-toolbar columns={this.columns} default-index={this.userArr[0]} onConfirm={this.confirmSex}/>
           </van-popup>
         </div>
       </Wrapper>
@@ -162,7 +159,6 @@ export default {
   data() {
     return {
       user: [],
-      userData: [],
       sexShow: false, // 性别
       popupVisible: false, // 地区
       currentDateShow1: false, //日期
@@ -171,14 +167,27 @@ export default {
       minDate: new Date(1000, 0, 1),
       maxDate: new Date(3000, 12, 31),
       currentDate: new Date(2021, 0, 17),
+      userEdiot: {},
+      userArr: [],
+      userDetail: {},
+      areaList, // 默认省会数据
     };
   },
   async created() {
-    this.user = store.get('_cookieMusic');
-    console.log(this.user);
-    this.userData = store.get('__m__UserData');
-    console.log(this.userData);
+    const res1 = await getUserAccount(); // 用户登录数据
+    const deatil = await getUserDetail(res1.data.profile.userId); // 用户登录数据传id获取详情
+    this.userDetail = deatil.data.profile;
+    this.userArr = [
+      this.userDetail.gender,
+      this.userDetail.birthday,
+      this.userDetail.nickname,
+      this.userDetail.province,
+      this.userDetail.city,
+      this.userDetail.signature,
+    ];
+    console.log(this.userDetail);
   },
+
   methods: {
     getDay() {
       this.currentDateShow1 = !this.currentDateShow1;
@@ -190,13 +199,54 @@ export default {
       this.popupVisible = !this.popupVisible;
     },
     // 地区
-    confirm(e) {
+    async changeArea(e) {
       this.popupVisible = false;
-      this.currentDateShow = false;
-      console.log(e);
       this.area = e;
-      this.date = e;
-      console.log(this.area);
+      this.userDetail.province = Number(this.area[0].code);
+      this.userDetail.city = Number(this.area[1].code);
+      console.log(this.userDetail.province, this.userDetail.city);
+      if (
+        this.userArr[3] != this.userDetail.province &&
+        this.userArr[4] != this.userDetail.city
+      ) {
+        this.userArr[3] = this.userDetail.province;
+        this.userArr[4] = this.userDetail.city;
+        await getUpdate(
+          this.userArr[0],
+          this.userArr[1],
+          this.userArr[2],
+          this.userArr[3],
+          this.userArr[4],
+          this.userArr[5]
+        )
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+    // 性别
+    async confirmSex(e){
+      if(e === '男'){
+        this.userArr[0] = 1;
+      }else{
+        this.userArr[0] = 2;
+      }
+      await getUpdate(this.userArr[0], this.userArr[1], this.userArr[2], this.userArr[3], this.userArr[4], this.userArr[5]);
+    },
+    sexFn(sex) {
+      if (sex === 1) {
+        return '男';
+      } else if (sex === 2) {
+        return '女';
+      } else {
+        return '';
+      }
+    },
+    async changeDate(e) {
+      this.currentDateShow = false;
     },
   },
 };

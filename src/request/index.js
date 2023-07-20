@@ -77,3 +77,31 @@ export const getMP3 = (id) =>
   http.get('/song/url/v1', { params: { id, level: 'standard' } });
 export const getTrackDetail = (id) =>
   http.get('/song/detail', { params: { ids: id } });
+
+export const getUpdate = (
+  gender,
+  birthday,
+  nickname,
+  province,
+  city,
+  signature
+) =>
+  http.get('/user/update', {
+    params: { gender, birthday, nickname, province, city, signature },
+  });
+
+// mv
+export const Mv = (area) =>
+  http.get('/top/mv', { params: { limit: 50, area } });
+
+//歌词
+export const lyricText = (id) => http.get('/lyric', { params: { id } });
+
+// MV视频
+export const featMvUrl = (id) => http.get('/mv/url', { params: { id } });
+
+// MV视频信息
+export const featMvDetail = (mvid) => http.get('/mv/detail', { params: { mvid } });
+
+// MV点赞转发评论数
+export const featMvDetailInfo = (mvid) => http.get('/mv/detail/info', { params: { mvid } });

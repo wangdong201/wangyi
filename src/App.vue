@@ -15,7 +15,7 @@ export default {
     showPlayer() {
       // 在这里根据你的逻辑判断是否在当前页面显示播放器组件
         //   return this.$route.path !== '/Playsong';
-      if(this.$route.path === '/MusicPlayback'){
+      if(this.$route.path === '/MusicPlayback' || '/Material'){
         return false;
       }
       return true;
